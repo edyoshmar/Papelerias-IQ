@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog | IQ Papelería</title>
+    <meta name="description" content="Consejos, noticias y novedades de IQ Papelería Querétaro." />
+    <link rel="stylesheet" href="modificacionColor.Css" />
+    <style>
+        /* Contenido oculto inicialmente */
+        .contenido-extra {
+            display: none;
+            margin-top: 15px;
+        }
+        /* Botón de leer más */
+        .btn-leer-mas {
+            display: inline-block;
+            background: #6d28d9;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-top: 10px;
+            cursor: pointer;
+            border: none;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+        .btn-leer-mas:hover {
+            background: #4c1d95;
+        }
+
+        /* Imagen de los artículos del blog */
+        .img-blog {
+            display: block;
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            margin: 0 auto 15px;
+            border-radius: 12px;
+        }
+
+        /* Estilos del modal (ventana emergente) */
+        .modal {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-contenido {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        .modal-contenido p {
+            font-size: 1.2rem;
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+        .btn-cerrar {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-cerrar:hover {
+            background: #dc2626;
+        }
+
+        /* Artículos filtrados por categoría */
+        .articulo.oculto {
+            display: none;
+        }
+    </style>
+</head>
+<body class="   blog">
+<div id="contenedor">
+
+    <!-- Cabecera con logo (sin enlace) -->
+    <div id="cabecera">
+        <div id="logo">
+            <img src="imagenes/Logo IQ.png" alt="Logo IQ Papelería" />
+            <span>IQ Papelería</span>
+        </div>
+            <form action="" method="get">
+            </form>
+        <div class="clear"></div>
+    </div>
+
+    <!-- Menú principal -->
+    <div id="menu">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>           
+            <li><a href="moldes.html">Moldes</a></li>
+            <li><a href="Fotos.html">Fotos</a></li>
+            <li><a href="funciones.html">Funciones</a></li>
+            <li><a href="sobre-mi.html">Sobre Nosotros</a></li>
+            <li class="seleccionado"><a href="blog.html">Blog</a></li>
+            <li><a href="Contacto.html">Contacto</a></li>
+            <li><a href="Enlaces.html">Enlaces</a></li>            
+        </ul>
+        <div class="clear"></div>
+    </div>
+
+    <!-- Contenido del blog -->
+    <div id="contenido">
+        <div id="principal">
+
+            <!-- Artículo 1: Organización escolar (Categoría: Escolar) -->
+            <div class="articulo" id="articulo1" data-categoria="escolar">
+                <img src="imagenes/descarga.jpg" alt="Organización escolar" class="img-blog" />
+                <h2>🎒 Las 5 tendencias en organización escolar que arrasan en 2025</h2>
+                <p class="info">
+                    <span class="fecha">10 de junio, 2025</span>
+                    <span class="categoria"><a href="#">Escolar</a></span>
+                </p>
+                <p>Este año los estudiantes están dejando atrás las mochilas abarrotadas y están adoptando sistemas modulares, agendas digitales híbridas y mochilas con puerto USB. ¿Quieres saber cuáles son las 5 claves para un regreso a clases ordenado y con estilo?</p>
+                
+                <div class="contenido-extra" id="extra1">
+                    <p><strong>1. Agendas híbridas:</strong> Combinan papel y app. Marcas como Rocketbook permiten escribir y digitalizar al instante. En IQ ya las tenemos.</p>
+                    <p><strong>2. Mochilas con compartimentos modulares:</strong> Las nuevas Swissgear traen bolsas internas removibles para cables, lunch y laptop.</p>
+                    <p><strong>3. Kits de papelería minimalista:</strong> Plumas multifunción, cuadernos reutilizables y sets de oficina portátiles que caben en un estuche.</p>
+                    <p><strong>4. Etiquetas inteligentes:</strong> Con códigos QR que al escanear muestran el horario del alumno o datos de contacto en caso de pérdida.</p>
+                    <p><strong>5. Colores neón y pastel:</strong> La moda retro sigue dominando; los tonos lavanda, menta y amarillo pastel son los más buscados.</p>
+                    <p>Visítanos en cualquiera de nuestras sucursales para armar tu kit de regreso a clases con lo último en tendencias.</p>
+                </div>
+                <button class="btn-leer-mas" onclick="toggleLeerMas('extra1', this)">Leer más</button>
+            </div>
+
+            <!-- Artículo 2: Material ecológico (Categoría: Noticias IQ) -->
+            <div class="articulo" id="articulo2" data-categoria="noticias">
+                <img src="imagenes/Papeleriaeco.png" alt="Papelería ecológica" class="img-blog" />
+                <h2>🌱 Papelería ecológica: la nueva ola verde que está cambiando la industria</h2>
+                <p class="info">
+                    <span class="fecha">5 de junio, 2025</span>
+                    <span class="categoria"><a href="#">Noticias IQ</a></span>
+                </p>
+                <p>Cada vez más marcas están apostando por materiales reciclados, biodegradables y procesos carbono neutro. En IQ Papelerías nos sumamos a esta tendencia con una línea exclusiva de productos sustentables. Te contamos de qué se trata.</p>
+                
+                <div class="contenido-extra" id="extra2">
+                    <p><strong>Cuadernos de papel reciclado:</strong> Fabricados con 100% fibra post-consumo, con certificación FSC. Ya disponibles en nuestras sucursales.</p>
+                    <p><strong>Plumas biodegradables:</strong> Hechas a base de almidón de maíz. Se descomponen en menos de 2 años.</p>
+                    <p><strong>Empaques cero plástico:</strong> Varias marcas están eliminando los blísteres y usando cartón reciclado.</p>
+                    <p><strong>IQ Green Pack:</strong> Nuestro paquete escolar armado con productos ecológicos. Perfecto para escuelas que fomentan el cuidado del medio ambiente.</p>
+                    <p>Además, por cada compra de un producto verde, IQ dona un cuaderno a comunidades escolares en Querétaro. ¡Súmate!</p>
+                </div>
+                <button class="btn-leer-mas" onclick="toggleLeerMas('extra2', this)">Leer más</button>
+            </div>
+
+            <!-- Artículo 3: Impresión sin contacto (Categoría: Servicios) -->
+            <div class="articulo" id="articulo3" data-categoria="servicios">
+                <img src="imagenes/impresíon digital.jpg" alt="Impresión digital" class="img-blog" />
+                <h2>🖨️ Adiós a las filas: así funciona la impresión sin contacto en IQ Papelerías</h2>
+                <p class="info">
+                    <span class="fecha">1 de junio, 2025</span>
+                    <span class="categoria"><a href="#">Servicios</a></span>
+                </p>
+                <p>Imagina enviar tus archivos por correo electrónico mientras vas en el camión y encontrar tus impresiones listas al llegar a la sucursal. Eso ya es una realidad en nuestras dos sucursales. Te explicamos cómo aprovechar este servicio.</p>
+                
+                <div class="contenido-extra" id="extra3">
+                    <p><strong>Paso 1:</strong> Envía tu archivo PDF a <a href="mailto:impresion@iqpapelerias.com.mx">impresion@iqpapelerias.com.mx</a> indicando el número de copias, tamaño y si es a color o blanco y negro.</p>
+                    <p><strong>Paso 2:</strong> Recibirás un código de confirmación con el costo exacto.</p>
+                    <p><strong>Paso 3:</strong> Acude a la sucursal que elijas (Juriquilla o Plaza Atelier), proporciona tu código, paga y recoge tus impresiones. Sin formatear USB, sin instalar drivers.</p>
+                    <p><strong>Horario extendido:</strong> De lunes a viernes hasta las 9:00 pm, para que ni los noctámbulos se queden sin su proyecto.</p>
+                    <p>Este sistema ya representa el 40% de nuestras impresiones diarias y los clientes lo califican como "una salvación".</p>
+                </div>
+                <button class="btn-leer-mas" onclick="toggleLeerMas('extra3', this)">Leer más</button>
+            </div>
+
+        </div>
+
+        <!-- Barra lateral del blog -->
+        <div id="secundario">
+            <h3>Categorías del blog</h3>
+            <ul id="lista-categorias">
+                <li><a href="#" data-categoria="escolar">Escolar</a></li>
+                <li><a href="#" data-categoria="noticias">Noticias IQ</a></li>
+                <li><a href="#" data-categoria="servicios">Servicios</a></li>
+                <li><a href="#" data-categoria="arte">Arte</a></li>
+                <li><a href="#" data-categoria="manualidades">Manualidades</a></li>
+            </ul>
+            <div class="clear"></div>
+
+            <h3>Artículos recientes</h3>
+            <ul>
+                <li><a href="#articulo1">Tendencias organización</a></li>
+                <li><a href="#articulo2">Papelería ecológica</a></li>
+                <li><a href="#articulo3">Impresión sin contacto</a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <!-- Pie de página -->
+    <div id="pie">
+        <p>&copy; 2025 IQ Papelería – Querétaro, Qro. | Tel: 442 123 4567</p>
+    </div>
+</div>
+
+<!-- Modal para categorías sin noticias -->
+<div id="modal-sin-noticias" class="modal">
+    <div class="modal-contenido">
+        <p>No hay noticias por el momento.</p>
+        <button class="btn-cerrar" onclick="cerrarModal()">Cerrar</button>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script>
+    // Expander/colapsar contenido "Leer más"
+    function toggleLeerMas(idExtra, boton) {
+        const extra = document.getElementById(idExtra);
+        if (extra.style.display === "none" || extra.style.display === "") {
+            extra.style.display = "block";
+            boton.textContent = "Leer menos";
+        } else {
+            extra.style.display = "none";
+            boton.textContent = "Leer más";
+        }
+    }
+
+    // Filtrar artículos por categoría
+    const categoriasLinks = document.querySelectorAll('#lista-categorias a');
+    const articulos = document.querySelectorAll('.articulo[data-categoria]');
+    const modal = document.getElementById('modal-sin-noticias');
+
+    categoriasLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const categoriaSeleccionada = this.getAttribute('data-categoria');
+            
+            // Ocultar todos los artículos
+            articulos.forEach(articulo => {
+                articulo.classList.add('oculto');
+            });
+
+            // Mostrar solo los de la categoría seleccionada
+            const articulosFiltrados = document.querySelectorAll(`.articulo[data-categoria="${categoriaSeleccionada}"]`);
+            
+            if (articulosFiltrados.length > 0) {
+                articulosFiltrados.forEach(articulo => {
+                    articulo.classList.remove('oculto');
+                });
+            } else {
+                // Si no hay artículos, mostrar modal
+                modal.style.display = 'flex';
+            }
+        });
+    });
+
+    // Cerrar modal
+    function cerrarModal() {
+        modal.style.display = 'none';
+        // Volver a mostrar todos los artículos al cerrar
+        articulos.forEach(articulo => {
+            articulo.classList.remove('oculto');
+        });
+    }
+
+    // Cerrar modal haciendo clic fuera del contenido
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            cerrarModal();
+        }
+    }
+</script>
+</body>
+</html>
