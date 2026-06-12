@@ -135,6 +135,81 @@
         .producto-busqueda:last-child {
             border-bottom: none;
         }
+
+        /* ========== NUEVOS ESTILOS PARA PERFIL COMPACTO ========== */
+        .perfil-circulo {
+            position: relative;
+            display: inline-block;
+        }
+        .perfil-circulo img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .perfil-circulo img:hover {
+            border-color: #fde047;
+        }
+
+        .perfil-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 110%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            padding: 20px;
+            min-width: 220px;
+            z-index: 100;
+            text-align: left;
+            color: #2d3748;
+        }
+        .perfil-dropdown.mostrar {
+            display: block;
+        }
+        .perfil-dropdown img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 3px solid #3b82f6;
+        }
+        .perfil-dropdown p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+        .btn-editar-perfil {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .btn-editar-perfil:hover {
+            background: #2563eb;
+        }
+
+        .btn-login {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .btn-login:hover {
+            background: #059669;
+        }
     </style>
 </head>
 <body>
@@ -497,19 +572,35 @@ function procesarPago(e) {
     cerrarPago();
 }
 
-// ==================== PERFIL / LOGIN ====================
+// ==================== PERFIL / LOGIN (VERSIÓN COMPACTA) ====================
 function actualizarZonaPerfil() {
     const zona = document.getElementById('zonaPerfil');
     if (usuario) {
         const foto = usuario.foto || 'imagenes/default-avatar.png';
         zona.innerHTML = `
-            <div class="perfil">
-                <img src="${foto}" alt="Foto" onerror="this.src='imagenes/default-avatar.png'">
-                <span>Hola, ${usuario.nombre}</span>
-                <button onclick="abrirEditarPerfil()" style="background:white; color:#3b82f6; border:none; padding:5px 10px; border-radius:10px; cursor:pointer;">Editar</button>
-            </div>`;
+            <div class="perfil-circulo">
+                <img src="${foto}" alt="Perfil" onerror="this.src='imagenes/default-avatar.png'" id="fotoPerfil" />
+                <div class="perfil-dropdown" id="perfilDropdown">
+                    <img src="${foto}" alt="Perfil grande" onerror="this.src='imagenes/default-avatar.png'" />
+                    <p><strong>${usuario.nombre}</strong></p>
+                    <p>📧 ${usuario.correo}</p>
+                    <p>📚 ${usuario.nivel || 'No especificado'}</p>
+                    <button class="btn-editar-perfil" onclick="abrirEditarPerfil()">Editar perfil</button>
+                </div>
+            </div>
+        `;
+        document.getElementById('fotoPerfil').addEventListener('click', function(e) {
+            e.stopPropagation();
+            document.getElementById('perfilDropdown').classList.toggle('mostrar');
+        });
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.perfil-circulo')) {
+                const dropdown = document.getElementById('perfilDropdown');
+                if (dropdown) dropdown.classList.remove('mostrar');
+            }
+        });
     } else {
-        zona.innerHTML = `<button onclick="abrirLogin()" style="background:#10b981; color:white; border:none; padding:8px 15px; border-radius:20px; cursor:pointer;">Iniciar sesión</button>`;
+        zona.innerHTML = `<button class="btn-login" onclick="abrirLogin()">Iniciar sesión</button>`;
     }
 }
 
@@ -531,6 +622,10 @@ function guardarPerfil(e) {
     actualizarZonaPerfil();
 }
 function abrirEditarPerfil() {
+    // Cierra el dropdown si está abierto
+    const dropdown = document.getElementById('perfilDropdown');
+    if (dropdown) dropdown.classList.remove('mostrar');
+    // Carga los datos en el formulario
     document.getElementById('nombreLogin').value = usuario.nombre;
     document.getElementById('correoLogin').value = usuario.correo;
     document.getElementById('fotoLogin').value = usuario.foto || '';
