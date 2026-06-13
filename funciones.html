@@ -16,8 +16,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             margin: 20px 0;
         }
-        .contenedor-video iframe,
-        .contenedor-video video {
+        .contenedor-video iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -37,37 +36,36 @@
             color: #0f766e;
             margin-top: 0;
         }
-        .historial-compras {
-            margin-top: 15px;
-        }
         .compra-item {
             background: #e6f7f2;
             border-radius: 10px;
             padding: 10px;
             margin-bottom: 10px;
         }
-        .compra-item p {
-            margin: 5px 0;
-        }
     </style>
 </head>
-<body class="funciones">
+<body class="portafolio">
 <div id="contenedor">
 
-    <!-- Cabecera con logo (sin enlace) -->
     <div id="cabecera">
         <div id="logo">
             <img src="imagenes/Logo IQ.png" alt="Logo IQ Papelería" />
             <span>IQ Papelería</span>
         </div>
-
+        <div id="buscador">
+            <form action="" method="get">
+                <fieldset>
+                    <input type="text" name="busqueda" size="30" placeholder="Buscar..." />
+                    <input type="submit" value="Buscar" />
+                </fieldset>
+            </form>
+        </div>
         <div class="clear"></div>
     </div>
 
-    <!-- Menú principal -->
     <div id="menu">
         <ul>
-            <li><a href="index.html">Inicio</a></li>           
+            <li><a href="index.html">Inicio</a></li>
             <li><a href="moldes.html">Moldes</a></li>
             <li><a href="Fotos.html">Fotos</a></li>
             <li class="seleccionado"><a href="funciones.html">Funciones</a></li>
@@ -79,7 +77,6 @@
         <div class="clear"></div>
     </div>
 
-    <!-- Contenido principal -->
     <div id="contenido">
         <div id="principal">
             <div class="articulo">
@@ -87,39 +84,31 @@
                 <p>Conoce cómo aprovechar al máximo nuestros servicios digitales y presenciales.</p>
             </div>
 
-            <!-- Función 1: Impresión sin contacto -->
             <div class="funcion-item">
                 <h3>🖨️ Impresión sin contacto</h3>
                 <p>Envía tus archivos PDF a <a href="mailto:impresion@iqpapelerias.com.mx">impresion@iqpapelerias.com.mx</a>, recibe un código de confirmación y recoge en sucursal.</p>
-                <p><strong>Requisitos:</strong> Archivo en PDF, indicar copias, tamaño y color.</p>
             </div>
 
-            <!-- Función 2: Paquetes escolares personalizados -->
             <div class="funcion-item">
                 <h3>🎒 Paquetes escolares a medida</h3>
                 <p>Arma el paquete de útiles para tus hijos o para toda la escuela. Cotiza por volumen y recibe descuentos especiales.</p>
-                <p><strong>Incluye:</strong> Lista personalizada, facturación electrónica, entrega en sucursal.</p>
             </div>
 
-            <!-- Función 3: Facturación electrónica -->
-            <div class="funcion-item">
-                <h3>🧾 Facturación electrónica automática</h3>
-                <p>Todas tus compras pueden facturarse al instante. Solo proporciona tus datos fiscales en caja y recibe tu CFDI por correo.</p>
-            </div>
-
-            <!-- Video tutorial -->
+            <!-- NUEVO: Video tutorial de navegación -->
             <div class="articulo">
-                <h2>🎥 Video tutorial</h2>
-                <p>Aprende a usar nuestro sitio web.</p>
+                <h2>🧭 Tutorial de navegación del sitio</h2>
+                <p>Te explicamos cómo moverte por todas las secciones de IQ Papelería.</p>
                 <div class="contenedor-video">
-                    <video controls>
-                        <source src="videos/90648.mp4" type="video/mp4">
-                    </video>
+                    <!-- Cambia el ID del video por el tuyo cuando lo subas a YouTube -->
+                    <iframe src="https://youtu.be/ThLvH1wwmg0?si=qphatPKdm6XJa4F-"
+                            title="Tutorial IQ Papelerías"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                    </iframe>
                 </div>
             </div>
         </div>
 
-        <!-- Barra lateral -->
         <div id="secundario">
             <h3>Otras funciones</h3>
             <ul>
@@ -133,14 +122,12 @@
         <div class="clear"></div>
     </div>
 
-    <!-- Pie de página -->
     <div id="pie">
-        <p>&copy; 2025 IQ Papelería – Querétaro, Qro. | Tel: 442 123 4567</p>
+        <p>&copy; 2025 IQ Papelería – Querétaro, Qro.</p>
     </div>
 </div>
 
 <script>
-    // Cargar historial de compras al hacer clic
     document.getElementById('btnHistorial').addEventListener('click', function(e) {
         e.preventDefault();
         const contenedor = document.getElementById('contenedorHistorial');
@@ -155,12 +142,10 @@
     function mostrarHistorial() {
         const contenedor = document.getElementById('contenedorHistorial');
         let historial = JSON.parse(localStorage.getItem('historialCompras')) || [];
-
         if (historial.length === 0) {
             contenedor.innerHTML = '<p style="color:#718096;">No hay compras registradas aún.</p>';
             return;
         }
-
         let html = '<div class="historial-compras">';
         historial.reverse().forEach(compra => {
             html += `
